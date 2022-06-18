@@ -3,6 +3,7 @@ RUN apt update && apt upgrade -y
 RUN apt install -y git maven
 RUN git clone https://github.com/dobrosi/vaadin-microservices-demo.git
 RUN cd /vaadin-microservices-demo
+RUN git pull
 WORKDIR /vaadin-microservices-demo
 RUN mvn --quiet package -Pproduction
 COPY discovery-server/target/*SNAPSHOT.jar /discovery-server.jar
