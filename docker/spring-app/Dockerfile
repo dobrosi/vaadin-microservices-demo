@@ -4,7 +4,7 @@ RUN apt install -y git maven
 RUN git clone https://github.com/dobrosi/vaadin-microservices-demo.git
 WORKDIR /vaadin-microservices-demo
 RUN git pull
-RUN mvn package -Pproduction
+RUN mvn package -DskipTests
 COPY discovery-server/target/*SNAPSHOT.jar /discovery-server.jar
 COPY config-server/target/*SNAPSHOT.jar /config-server.jar
 COPY biz-application/target/*SNAPSHOT.jar /biz-application.jar
