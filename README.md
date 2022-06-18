@@ -5,7 +5,7 @@ A microservices demo implemented with [Spring Cloud Netflix](http://cloud.spring
 If you are using Vaadin 8, checkout the [vaadin-8](https://github.com/alejandro-du/vaadin-microservices-demo/tree/vaadin-8) branch. 
 
 ## Docker
-All-on-one
+All-in-one
 ```
 git clone https://github.com/alejandro-du/vaadin-microservices-demo.git
 cd vaadin-microservices-demo/docker
