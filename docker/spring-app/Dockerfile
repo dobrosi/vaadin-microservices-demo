@@ -1,11 +1,10 @@
-FROM timbru31/java-node
+FROM timbru31/java-node:jdk
 RUN apt update && apt upgrade -y
 RUN apt install -y git maven
 RUN git clone https://github.com/dobrosi/vaadin-microservices-demo.git
-RUN cd /vaadin-microservices-demo
-RUN git pull
 WORKDIR /vaadin-microservices-demo
-RUN mvn --quiet package -Pproduction
+RUN git pull
+RUN mvn package -Pproduction
 COPY discovery-server/target/*SNAPSHOT.jar /discovery-server.jar
 COPY config-server/target/*SNAPSHOT.jar /config-server.jar
 COPY biz-application/target/*SNAPSHOT.jar /biz-application.jar
