@@ -1,14 +1,14 @@
 FROM timbru31/java-node:jdk
 RUN apt update && apt upgrade -y
-RUN apt install -y git maven
+RUN apt install -y git maven wget
 RUN git clone https://github.com/dobrosi/vaadin-microservices-demo.git
+RUN cd /vaadin-microservices-demo
 WORKDIR /vaadin-microservices-demo
-RUN git pull
-RUN mvn package -DskipTests
-COPY discovery-server/target/*SNAPSHOT.jar /discovery-server.jar
-COPY config-server/target/*SNAPSHOT.jar /config-server.jar
-COPY biz-application/target/*SNAPSHOT.jar /biz-application.jar
-COPY news-application/target/*SNAPSHOT.jar /news-application.jar
-COPY website-application/target/*SNAPSHOT.jar /website-application.jar
-COPY proxy-server/target/*SNAPSHOT.jar /proxy-server.jar
-COPY admin-application/target/*SNAPSHOT.jar /admin-application.jar
+RUN mvn -q package -DskipTests
+RUN cp discovery-server/target/*SNAPSHOT.jar /discovery-server.jar
+RUN cp config-server/target/*SNAPSHOT.jar /config-server.jar
+RUN cp biz-application/target/*SNAPSHOT.jar /biz-application.jar
+RUN cp news-application/target/*SNAPSHOT.jar /news-application.jar
+RUN cp website-application/target/*SNAPSHOT.jar /website-application.jar
+RUN cp proxy-server/target/*SNAPSHOT.jar /proxy-server.jar
+RUN cp admin-application/target/*SNAPSHOT.jar /admin-application.jar
