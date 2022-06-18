@@ -9,6 +9,8 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>parent</module>
+        <module>parent-vaadin</module>
         <module>discovery-server</module>
         <module>config-server</module>
         <module>biz-application</module>

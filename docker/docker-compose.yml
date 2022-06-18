@@ -1,0 +1,63 @@
+version: "3"
+services:
+  discovery-server:
+    build:
+      context: ..
+      dockerfile: docker/spring-app/Dockerfile
+    ports:
+      - 8001:8001
+    command: /bin/sh -c "java -jar /discovery-server.jar"
+  config-server:
+    build:
+      context: ..
+      dockerfile: docker/spring-app/Dockerfile
+    ports:
+      - 8101:8101
+    command: /bin/sh -c "java -jar /config-server.jar"
+    depends_on:
+      - "discovery-server"
+  biz-application:
+    build:
+      context: ..
+      dockerfile: docker/spring-app/Dockerfile
+    ports:
+      - 9001:9001
+    command: /bin/sh -c "java -jar /biz-application.jar"
+    depends_on:
+      - "config-server"
+  admin-application:
+    build:
+      context: ..
+      dockerfile: docker/spring-app/Dockerfile
+    ports:
+      - 9101:9101
+    command: /bin/sh -c "java -jar /admin-application.jar"
+    depends_on:
+      - "biz-application"
+  news-application:
+    build:
+      context: ..
+      dockerfile: docker/spring-app/Dockerfile
+    ports:
+      - 9201:9201
+    command: /bin/sh -c "java -jar /news-application.jar"
+    depends_on:
+      - "admin-application"
+  website-application:
+    build:
+      context: ..
+      dockerfile: docker/spring-app/Dockerfile
+    ports:
+      - 9301:9301
+    command: /bin/sh -c "java -jar /website-application.jar"
+    depends_on:
+      - "news-application"
+  proxy-server:
+    build:
+      context: ..
+      dockerfile: docker/spring-app/Dockerfile
+    ports:
+      - 8080:8080
+    command: /bin/sh -c "java -jar /proxy-server.jar"
+    depends_on:
+      - "website-application"
